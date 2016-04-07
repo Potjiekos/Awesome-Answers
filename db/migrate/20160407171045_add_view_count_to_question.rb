@@ -4,6 +4,6 @@ class AddViewCountToQuestion < ActiveRecord::Migration
 # This migration adds a column named `view_count` to the `questions` table the type of the column is integer
 
   def change
-    add_column :questions, :view_count, :integer
+    add_column :questions, :view_count, :integer # default: 0, null:false.
   end
 end
