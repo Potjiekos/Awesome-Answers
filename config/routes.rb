@@ -16,6 +16,34 @@ Rails.application.routes.draw do
 
   post "/contact" => "contact#create"
 
+  resources :users, only: [:new, :create]
+
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
+
+
+
+  resources :questions do
+    # get :search, on: :collection
+    # get :search, on: :member
+    # get :search
+
+# The answers routes will be the standard ones prefixed with /questions/:question_id. This way when, for instance, we wish to create an answer we know the question that it references. All the helpers will be the same as before, but prefixed with 'question'
+
+    resources :answers, only: [:create, :destroy]
+  end
+
+  # 'resources :questions' will generate, in rails, the below:
+
+  # get "/questions/new" => "questions#new", as: :new_question
+  # post "/questions" => "questions#create", as: :questions
+  # get "/questions/:id" => "questions#show", as: :question
+  # get "/questions" => "questions#index"
+  # get "/questions/:id/edit" => "questions#edit", as: :edit_question
+  # patch "/questions/:id" => "questions#update"
+  # delete "/questions/:id" => "questions#destroy"
+
 
 # This defines the 'root' or homepage of our application and will direct it to the WelcomeController with 'index' action. We will have access to the helper methods: root_path and root_url
   root "welcome#index"

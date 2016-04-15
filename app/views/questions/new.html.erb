@@ -1,0 +1,26 @@
+<div class="header">
+  <h2>Submit A New Question</h2>
+</div>
+<hr>
+
+<!-- This will display an error message at the top of the page -->
+<%= @question.errors.full_messages.join(" :( ") %>
+
+
+<%# form_for is a Rails helper method that accepts an ActiveRecord object as the first argument. If @question is not persisted in the database, form_for makes the 'action' of the form go to 'questions_path' (Rails convention) and it will make the method of 'form' be POST. 'questions_path' must be defined or the application will throw an error.%>
+
+<%= form_for @question, :html => {:id => "question_form"} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :title  %>  <%# f.label :title, class: "abc" to style %>
+    <%= f.text_field :title %>
+  </div>
+<br>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+<br>
+  <%= f.submit %>
+
+<% end %>

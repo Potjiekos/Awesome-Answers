@@ -1,5 +1,10 @@
 class Question < ActiveRecord::Base
 
+# When using 'has_many' you must put a symbol for the associated record in plural format. You should also provide the :dependent option which can be either ':destroy:' which deletes all the associated answers when the question is deleted, or ':nullify:' which makes 'question_id' NULL for all associated answers.
+  has_many :answers, dependent: :destroy
+  belongs_to :category
+  belongs_to :user
+
 # validates_presence_of :title  # This is considered to be depricated- outdated syntax that will likely soon be removed and/or considered obsolete.
 
 # Multiple fields of validation may also be written in a single line as:
@@ -37,17 +42,16 @@ class Question < ActiveRecord::Base
 
 scope :recent_three, lambda {order("created_at DESC").limit(3)}
 
-# scope :hello_search, lambda {where.("title ILIKE ?", "%#{hello}%")}
-
-  scope :hello_search, lambda {where.("title ILIKE ?", "%hello%")}
-
 # With the below method you may run Question.search("search_term") to look for entries with the search term in either the title or body.
 
   def self.search(search_term)
     where(["title ILIKE ? OR body ILIKE ?", "%#{search_term}%", "%#{search_term}%"])
 # May also be written as:
 #   where(["title ILIKE :term OR body ILIKE :term", {term: "%#{search_term}%"}])
+  end
 
+  def user_full_name
+    user ? user.full_name : ""
   end
 
   private

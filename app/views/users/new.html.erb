@@ -1,0 +1,33 @@
+<div class="header">
+  <h2>Create User Account</h2>
+</div>
+
+<div class="error_message">
+<%= @user.errors.full_messages.join(", ") %>
+</div>
+
+<hr>
+
+<%= form_for @user do |f| %>
+  <div>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div><br>
+  <div>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div><br>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div><br>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div><br>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div><br>
+  <div> <%= f.submit "Create User Account" %> </div>
+<% end %>

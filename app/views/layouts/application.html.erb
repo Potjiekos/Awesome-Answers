@@ -5,6 +5,41 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<style media="screen">
+    html {
+      margin-left: 30px;
+    }
+
+    .header {
+      color: teal;
+    }
+    #question_form {
+      /*empty styling*/
+    }
+
+    hr {
+      margin-right: 90px;
+    }
+
+    .moo {
+      margin-right: 30px;
+    }
+
+    .notification_error {
+      color: red;
+      font-weight: bolder;
+      font-size: 15px;
+      text-decoration: underline;
+    }
+
+    .notice {
+      margin-top: 15px;
+    }
+
+</style>
+
 </head>
 
 <body>
@@ -13,12 +48,24 @@
 
 <hr>
 <!-- <a href="<%= home_path %>">Home</a> -->
-<%= link_to("Home", home_path, {class: "abc"}) %>
+<%= link_to("Home", home_path, {class: "abc"}) %> |
 <!-- The above both produce the same 'Home' link but the latter is more popular -->
 <!-- <a href="<%= about_path %>">About</a> -->
-<%= link_to("About", about_path) %>
-<%= link_to("Contact", contact_path) %>
+<%= link_to("About", about_path) %> |
+<%= link_to("Contact", contact_path) %> |
+<%= link_to("Submit New Question", new_question_path) %> |
+<%= link_to("All Questions", questions_path) %> |
 
+<% if user_signed_in? %>
+  Hello, <%= current_user.first_name %>
+  | <%= link_to "Log Out", sessions_path, method: :delete %>
+  <% else %>
+  <%= link_to "Sign In", new_session_path %> |
+  <%= link_to("Create Account", new_user_path) %> |
+<% end %>
+
+  <div class="notice"><%= notice %><div>
+  <div class="alert"><%= alert %></div>
 <hr>
 
 <%= yield %>

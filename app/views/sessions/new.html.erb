@@ -1,0 +1,18 @@
+<div class="header">
+  <h3>User Sign In</h3>
+</div>
+<hr>
+
+<!-- Here we use form_tag instead of form_for as the latter is used only for objects.  -->
+
+<%= form_tag sessions_path do %>
+  <div>
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+  </div><br>
+  <div>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div><br>
+  <%= submit_tag "Sign In" %>
+<% end %>

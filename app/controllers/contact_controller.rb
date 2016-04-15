@@ -1,8 +1,8 @@
 class ContactController < ApplicationController
 
   def new
-    Rails.logger.info 
-    render :new, layout: "special"
+    Rails.logger.info
+    # render :new, layout: "special"
   end
 
   def create

@@ -1,0 +1,12 @@
+<div class="header">
+  <h2>All Questions</h2>
+</div>
+<hr>
+
+<% @questions.each do |q| %>
+
+  <div>
+    <%= link_to q.title, question_path(q) %>
+  </div>
+
+<% end %>

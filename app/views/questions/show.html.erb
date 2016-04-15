@@ -1,0 +1,37 @@
+<div class="header">
+  <h2>Thank you for submitting your question!</h2>
+</div>
+<hr>
+
+<h3><%= @question.title %></h3>
+<p><%= @question.body %></p>
+<p>View Count:<%= @question.view_count %></p>
+<p>Created By: <%= @question.user_full_name.titleize %></p>
+
+<hr>
+
+| <%= link_to "Edit", edit_question_path(@question) %> |
+<%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure you want to delete this question?"} %> |
+
+
+  <hr>
+  <%= @answer.errors.full_messages.join(", ") %>
+<%#= form_for @answer, url: question_answers_path(@question) do |f| %>
+<%= form_for [@question, @answer] do |form_helper|  %>
+  <%= form_helper.text_area :body %>
+  <div><%= form_helper.submit %></div>
+<% end %>
+
+<hr>
+<div class="header">
+  <h3>Answers</h3>
+</div>
+<hr>
+<% @question.answers.each do |ans| %>
+  <%= ans.body %>
+  Answered By: <%= ans.user_full_name.titleize %>
+  <%= link_to "delete", question_answer_path(@question, ans),
+                        data: {confirm: "Are you sure?"},
+                        method: :delete %>
+  <hr>
+<% end %>
